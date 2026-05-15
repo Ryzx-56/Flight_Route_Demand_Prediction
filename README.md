@@ -93,7 +93,6 @@ The ~10x passenger gap between Low and High clusters was found without any label
  
 ## Visualizations
  
-> Add your output images to an `images/` folder in the repo root and they will render here automatically.
  
 ### GMM Demand Clusters (PCA)
 ![GMM Clusters](images/gmm_clusters.png)
@@ -140,7 +139,7 @@ flight-route-demand-prediction/
 ├── XGBoost.py                # Solution 3 — XGBoost regressor + decision threshold
 ├── LSTM_Dense22.py           # SOA Benchmark — Hybrid LSTM-Dense
 │
-├── images/                   # Visualization outputs (add your plots here)
+├── images/                   # Visualization outputs 
 │
 └── DATA/
     ├── International_Report_Departures.csv
