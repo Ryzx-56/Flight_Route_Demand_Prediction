@@ -120,7 +120,9 @@ The ~10x passenger gap between Low and High clusters was found without any label
  
 ### Keep vs. Remove — SOA (LSTM-Dense)
 ![Keep vs Remove SOA](images/keep_vs_remove_soa.png)
- 
+
+### Performance Comparison of Predictive Models
+![Performance Comparison of Predictive Models](images/Comparison_of_models.png)
 ---
  
 ## Project Structure
