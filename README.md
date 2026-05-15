@@ -48,7 +48,7 @@ Three source files were merged and processed into one complete ML pipeline.
 
 | Name | Contributions |
 |---|---|
-| **Abdulmalik Y. Housawi** | Team Lead · Dataset sourcing · Full preprocessing pipeline · Data merge · Feature engineering · GMM model |
+| **Abdulmalik Y. Hawsawi** | Team Lead · Dataset sourcing · Full preprocessing pipeline · Data merge · Feature engineering · GMM model |
 | **Hamed H. Al-Ansari** | GRU model · Feature engineering |
 | **Nasser H. Qahhat** | XGBoost model · Feature engineering |
 | **Waleed A. Al-Jaser** | SOA Benchmark (Hybrid LSTM-Dense) |
