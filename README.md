@@ -1,7 +1,3 @@
-# Flight_Route_Demand_Prediction
-Comparative ML study on 880K+ BTS flight records — GMM, GRU, XGBoost, and a Hybrid LSTM-Dense SOA benchmark trained to classify route demand and output Keep/Remove decisions for airline route planning.
-
-
 # ✈️ Flight Route Demand Prediction
  
 Four ML models trained on 880K+ BTS flight records to classify airline route demand and recommend which routes to keep or cut. Built as a comparative study across unsupervised clustering, supervised learning, and deep learning — benchmarked against a hybrid LSTM-Dense state-of-the-art baseline.
