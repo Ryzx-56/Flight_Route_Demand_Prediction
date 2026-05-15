@@ -40,7 +40,7 @@ Three source files were merged and processed into one complete ML pipeline.
 - **Raw Records:** 1.5M+
 - **Processed Records:** ~880K rows
 - **Scope:** Multi-year US international flight history
-- **Source & Assembly:** Abdulmalik Y. Housawi
+- **Source & Assembly:** Abdulmalik Y. Hawsawi
 
 ---
 
