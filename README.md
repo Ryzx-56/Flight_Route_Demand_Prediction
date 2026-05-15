@@ -59,7 +59,7 @@ Three source files were merged and processed into one complete ML pipeline.
 
 | Model | Type | Developer |
 |---|---|---|
-| **Gaussian Mixture Model (GMM)** | Unsupervised Machine Learning | Abdulmalik Y. Housawi |
+| **Gaussian Mixture Model (GMM)** | Unsupervised Machine Learning | Abdulmalik Y. Hawsawi |
 | **GRU** | Supervised Deep Learning | Hamed H. Al-Ansari |
 | **XGBoost** | Supervised Machine Learning | Nasser H. Qahhat |
 | **Hybrid LSTM-Dense** | State-of-the-Art Benchmark | Waleed A. Al-Jaser |
