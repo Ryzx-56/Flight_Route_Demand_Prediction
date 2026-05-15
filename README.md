@@ -61,7 +61,7 @@ Each model was built independently and evaluated on the same cleaned dataset, th
  
 | Model | Accuracy | Precision | Recall | F1-Score | Train Time | Inference |
 |---|---|---|---|---|---|---|
-| GMM | — ¹ | — | — | — | 39.88s | 0.0001ms/sample |
+| GMM | 69% | 73% | 69% | 68% | 39.88s | 0.0001ms/sample |
 | GRU | 94.8% | 93.0% | 94.0% | 93.0% | 36m 30s | 6s |
 | XGBoost | 85.6% | 78.8% | 78.8% | 78.8% | 1.32s | 0.0008ms/sample |
 | SOA (LSTM-Dense) | 98.0% | 99.0% | 98.0% | 98.0% | 21m 2s | 12.9s |
