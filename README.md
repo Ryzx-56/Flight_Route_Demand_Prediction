@@ -75,7 +75,7 @@ Three source files were merged and processed into one complete ML pipeline.
 | **GMM** | 69% | 73% | 69% | 68% |
 | **GRU** | 94.8% | 93.0% | 94.0% | 93.0% |
 | **XGBoost** | 85.6% | 78.8% | 78.8% | 78.8% |
-| **SOA (LSTM-Dense)** | 98.0% | 99.0% | 98.0% | 98.0% |
+| **SOA (LSTM-Dense)** | 98.0% | 62.0% | 81.0% | 70.0% |
 
 > **Note:**  
 > The GMM model was trained as an **unsupervised clustering model** without using labels during training.
