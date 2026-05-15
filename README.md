@@ -1,236 +1,348 @@
 # ✈️ Flight Route Demand Prediction
- 
-Four ML models trained on 880K+ BTS flight records to classify airline route demand and recommend which routes to keep or cut. Built as a comparative study across unsupervised clustering, supervised learning, and deep learning — benchmarked against a hybrid LSTM-Dense state-of-the-art baseline.
- 
+
+Four ML models trained on 880K+ BTS flight records to classify airline route demand and recommend which routes to keep or cut. Built as a comparative study across unsupervised clustering, supervised learning, and deep learning benchmarked against a hybrid LSTM-Dense state-of-the-art baseline.
+
 ---
- 
-## The Problem
- 
-Airlines commit aircraft and crew to routes months in advance. By the time a route proves unprofitable, the damage is done. Most flights need a 75–80% load factor just to break even, and the industry's average net margin sits around 3.6% — a handful of underloaded routes can erase it.
- 
-This project trains models on historical passenger data to flag routes as High, Medium, or Low demand, then outputs a simple operational decision: **Keep** or **Remove**.
- 
+
+# 📌 The Problem
+
+Airlines commit aircraft and crew to routes months in advance. By the time a route proves unprofitable, the damage is done. Most flights need a **75–80% load factor** just to break even, while the airline industry's average net margin sits around **3.6%**.
+
+A handful of underloaded routes can erase profitability.
+
+This project trains machine learning models on historical passenger traffic data to classify routes into:
+
+- **High Demand**
+- **Medium Demand**
+- **Low Demand**
+
+The models then generate a simplified operational recommendation:
+
+✅ **Keep Route**  
+❌ **Remove Route**
+
 ---
- 
-## Dataset
- 
-**BTS US International Air Travel Statistics**
- 
-Three source files, merged and cleaned into a single pipeline:
- 
-| File | Contents |
+
+# 📊 Dataset
+
+## BTS US International Air Travel Statistics
+
+Three source files were merged and processed into one complete ML pipeline.
+
+| File | Description |
 |---|---|
 | `International_Report_Departures.csv` | Scheduled and charter departure counts per route and month |
 | `International_Report_Passengers.csv` | Scheduled and charter passenger counts per route and month |
-| `airports.csv` | Airport coordinates used to calculate route distances |
- 
-- Raw records: 1.5M+
-- After preprocessing: ~880K rows
-- Date range: Multi-year US international flight history
-The dataset was sourced and assembled by **Abdulmalik Hawsawi**.
- 
+| `airports.csv` | Airport coordinates used for route distance calculations |
+
+## Dataset Summary
+
+- **Raw Records:** 1.5M+
+- **Processed Records:** ~880K rows
+- **Scope:** Multi-year US international flight history
+- **Source & Assembly:** Abdulmalik Y. Housawi
+
 ---
- 
-## Team
- 
-| Name | Role |
+
+# 👥 Team
+
+| Name | Contributions |
 |---|---|
-| **Abdulmalik Y. Hawsawi** | Team Lead · Dataset sourcing · Full preprocessing pipeline · Data merge · Feature engineering (avg_demand_per_route) · GMM model · Overall comparison presenter |
-| **Hamed H. Al-Ansari** | GRU model · Feature engineering (demand sequence construction) |
-| **Nasser H. Qahhat** | XGBoost model · Feature engineering (distance calculation and binning) |
-| **Waleed A. Al-Jaser** | SOA benchmark (Hybrid LSTM-Dense) |
- 
+| **Abdulmalik Y. Housawi** | Team Lead · Dataset sourcing · Full preprocessing pipeline · Data merge · Feature engineering · GMM model |
+| **Hamed H. Al-Ansari** | GRU model · Feature engineering |
+| **Nasser H. Qahhat** | XGBoost model · Feature engineering |
+| **Waleed A. Al-Jaser** | SOA Benchmark (Hybrid LSTM-Dense) |
+
 ---
- 
-## Solutions
- 
-| Solution | Type | Author |
+
+# 🧠 Solutions Implemented
+
+| Model | Type | Developer |
 |---|---|---|
-| **GMM** — Gaussian Mixture Model | Unsupervised ML | Abdulmalik Y. Hawsawi |
-| **GRU** — Gated Recurrent Unit | Supervised Deep Learning | Hamed H. Al-Ansari |
-| **XGBoost** — Gradient Boosted Trees | Supervised ML | Nasser H. Qahhat |
-| **Hybrid LSTM-Dense** | SOA Benchmark | Waleed A. Al-Jaser |
- 
-Each model was built independently and evaluated on the same cleaned dataset, then compared head-to-head.
- 
+| **Gaussian Mixture Model (GMM)** | Unsupervised Machine Learning | Abdulmalik Y. Housawi |
+| **GRU** | Supervised Deep Learning | Hamed H. Al-Ansari |
+| **XGBoost** | Supervised Machine Learning | Nasser H. Qahhat |
+| **Hybrid LSTM-Dense** | State-of-the-Art Benchmark | Waleed A. Al-Jaser |
+
 ---
- 
-## Results
- 
-### Performance Metrics
- 
-| Model | Accuracy | Precision | Recall | F1-Score | Train Time | Inference |
-|---|---|---|---|---|---|---|
-| GMM | 69% | 73% | 69% | 68% | 39.88s | 0.0001ms/sample |
-| GRU | 94.8% | 93.0% | 94.0% | 93.0% | 36m 30s | 6s |
-| XGBoost | 85.6% | 78.8% | 78.8% | 78.8% | 1.32s | 0.0008ms/sample |
-| SOA (LSTM-Dense) | 98.0% | 99.0% | 98.0% | 98.0% | 21m 2s | 12.9s |
- 
-> ¹ GMM is unsupervised — standard classification metrics don't apply. It's validated through Silhouette Score, BIC/AIC, and cluster profile separation (see below).
- 
-### GMM Cluster Metrics
- 
-| Metric | Value |
-|---|---|
-| Silhouette Score | 0.3857 |
-| BIC | 4,783,161.45 |
-| AIC | 4,782,822.35 |
-| Low demand cluster avg passengers | 651 |
-| High demand cluster avg passengers | 6,999 |
- 
-The ~10x passenger gap between Low and High clusters was found without any labels — purely from the data's structure.
- 
-### Keep vs. Remove Distribution
- 
-| Model | Keep % | Remove % |
-|---|---|---|
-| SOA | 3.4% | 96.6% |
-| GMM | 17.3% | 82.7% |
-| GRU | 24.7% | 75.3% |
-| XGBoost | 34.0% | 66.0% |
- 
+
+# 📈 Results
+
+## Performance Metrics
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+|---|---|---|---|---|
+| **GMM** | 69% | 73% | 69% | 68% |
+| **GRU** | 94.8% | 93.0% | 94.0% | 93.0% |
+| **XGBoost** | 85.6% | 78.8% | 78.8% | 78.8% |
+| **SOA (LSTM-Dense)** | 98.0% | 99.0% | 98.0% | 98.0% |
+
+> **Note:**  
+> The GMM model was trained as an **unsupervised clustering model** without using labels during training.
+>
+> However, because labeled demand categories were available in the dataset, the discovered clusters were later mapped to the true classes for evaluation purposes. This allowed traditional classification metrics such as Accuracy, Precision, Recall, and F1-Score to be calculated for benchmarking against supervised models.
+>
+> Additional unsupervised validation methods included:
+>
+> - Silhouette Score
+> - BIC/AIC Analysis
+> - Cluster Profile Separation
+
 ---
- 
-## Visualizations
- 
- 
-### GMM Demand Clusters (PCA)
-![GMM Clusters](images/gmm_clusters.png)
- 
-### BIC / AIC vs Number of Components
-![BIC AIC Curve](images/bic_aic_curve.png)
- 
-### GMM Cluster Probability Heatmap
-![GMM Heatmap](images/gmm_heatmap.png)
- 
-### Keep vs. Remove — GMM
-![Keep vs Remove GMM](images/keep_vs_remove_gmm.png)
- 
-### Keep vs. Remove — GRU
-![Keep vs Remove GRU](images/keep_vs_remove_gru.png)
- 
-### GRU Confusion Matrix
-![GRU Confusion Matrix](images/gru_confusion_matrix.png)
- 
-### Keep vs. Remove — XGBoost
-![Keep vs Remove XGBoost](images/keep_vs_remove_xgboost.png)
- 
-### XGBoost Confusion Matrix
-![XGBoost Confusion Matrix](images/xgboost_confusion_matrix.png)
- 
-### Keep vs. Remove — SOA (LSTM-Dense)
-![Keep vs Remove SOA](images/keep_vs_remove_soa.png)
+
+# 📷 Visualizations
+
+## 📊 Overall Model Comparison
 
 ### Performance Comparison of Predictive Models
 ![Performance Comparison of Predictive Models](images/Comparison_of_models.png)
+
 ---
- 
-## Project Structure
- 
-```
+
+# 🔍 Gaussian Mixture Model (GMM)
+
+### GMM Demand Clusters (PCA)
+![GMM Clusters](images/gmm_clusters.png)
+
+### BIC / AIC vs Number of Components
+![BIC AIC Curve](images/bic_aic_curve.png)
+
+### GMM Cluster Probability Heatmap
+![GMM Heatmap](images/gmm_heatmap.png)
+
+### Keep vs. Remove — GMM
+![Keep vs Remove GMM](images/keep_vs_remove_gmm.png)
+
+---
+
+# 🤖 GRU Model
+
+### Keep vs. Remove — GRU
+![Keep vs Remove GRU](images/keep_vs_remove_gru.png)
+
+### GRU Confusion Matrix
+![GRU Confusion Matrix](images/gru_confusion_matrix.png)
+
+---
+
+# 🌲 XGBoost Model
+
+### Keep vs. Remove — XGBoost
+![Keep vs Remove XGBoost](images/keep_vs_remove_xgboost.png)
+
+### XGBoost Confusion Matrix
+![XGBoost Confusion Matrix](images/xgboost_confusion_matrix.png)
+
+---
+
+# 🧠 SOA Benchmark (Hybrid LSTM-Dense)
+
+### Keep vs. Remove — SOA (LSTM-Dense)
+![Keep vs Remove SOA](images/keep_vs_remove_soa.png)
+
+---
+
+# 📂 Project Structure
+
+```text
 flight-route-demand-prediction/
-│
 ├── README.md
 ├── requirements.txt
-│
-├── Preprocessing.py          # Data loading, merging, and cascading imputation
-├── FeatureEngineering.py     # Shared feature pipeline (distance, demand, lag features)
-│
-├── GMM.py                    # Solution 1 — Gaussian Mixture Model
-├── GRU_project.py            # Solution 2 — GRU sequence classifier
-├── XGBoost.py                # Solution 3 — XGBoost regressor + decision threshold
-├── LSTM_Dense22.py           # SOA Benchmark — Hybrid LSTM-Dense
-│
-├── images/                   # Visualization outputs 
-│
-└── DATA/
-    ├── International_Report_Departures.csv
-    ├── International_Report_Passengers.csv
-    └── airports.csv
+├── Preprocessing.py          # Data loading, merging, and cleaning
+├── FeatureEngineering.py     # Shared feature engineering pipeline
+├── Models/
+│   ├── GMM.py
+│   ├── GRU_project.py
+│   ├── XGBoost.py
+│   └── LSTM_Dense22.py
+├── images/
+│   ├── Comparison_of_models.png
+│   ├── gmm_clusters.png
+│   ├── bic_aic_curve.png
+│   ├── gmm_heatmap.png
+│   ├── keep_vs_remove_gmm.png
+│   ├── keep_vs_remove_gru.png
+│   ├── gru_confusion_matrix.png
+│   ├── keep_vs_remove_xgboost.png
+│   ├── xgboost_confusion_matrix.png
+│   └── keep_vs_remove_soa.png
 ```
- 
+
+> **Note:**  
+> The original dataset was too large to upload to GitHub.  
+> To run the project locally, place the required BTS dataset CSV files in your own local data directory before executing the preprocessing pipeline.
+
 ---
- 
-## Setup
- 
-Python 3.9–3.11 required. TensorFlow does not support Python 3.12+.
- 
+
+# ⚙️ Setup
+
+This project was built using **Python 3.10**.
+
+## 1️⃣ Clone the Repository
+
 ```bash
-# Create and activate a virtual environment
+git clone https://github.com/yourusername/flight-route-demand-prediction.git
+cd flight-route-demand-prediction
+```
+
+---
+
+## 2️⃣ Create a Virtual Environment
+
+### Windows
+
+```bash
 python -m venv venv
-source venv/bin/activate        # macOS / Linux
-venv\Scripts\activate           # Windows
- 
-# Install dependencies
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
- 
-**`requirements.txt`**
-```
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-xgboost
-tensorflow
-```
- 
-### Data Setup
- 
-Place the three dataset files inside a `DATA/` folder in the project root:
- 
-```
-DATA/
-├── International_Report_Departures.csv
-├── International_Report_Passengers.csv
-└── airports.csv
-```
- 
+
 ---
- 
-## Running the Models
- 
-All scripts depend on `Preprocessing.py` and `FeatureEngineering.py` being in the same directory.
- 
+
+# 📦 Requirements Summary
+
+## Deep Learning
+- tensorflow==2.21.0
+- keras==3.13.2
+
+## Machine Learning
+- scikit-learn==1.8.0
+- xgboost
+
+## Data Science
+- pandas==3.0.1
+- numpy==2.4.3
+
+## Visualization
+- matplotlib==3.10.8
+- seaborn==0.13.2
+
+---
+
+# ▶️ Running the Models
+
+All model scripts depend on:
+
+- `Preprocessing.py`
+- `FeatureEngineering.py`
+
+being present in the root directory.
+
+## Navigate to the Models Folder
+
 ```bash
-# GMM (unsupervised clustering)
+cd Models
+```
+
+---
+
+## Run Individual Models
+
+### GMM
+
+```bash
 python GMM.py
- 
-# GRU (sequence-based deep learning)
+```
+
+### GRU
+
+```bash
 python GRU_project.py
- 
-# XGBoost (gradient boosted trees)
+```
+
+### XGBoost
+
+```bash
 python XGBoost.py
- 
-# SOA Benchmark (Hybrid LSTM-Dense)
+```
+
+### Hybrid LSTM-Dense
+
+```bash
 python LSTM_Dense22.py
 ```
- 
-Each script handles its own training, evaluation, and visualization. Results print to the console and plots open via matplotlib.
- 
-> **XGBoost note:** Update the two path variables at the top of `XGBoost.py` to point to your local data files before running.
- 
+
 ---
- 
-## What We Found
- 
-**GRU beat XGBoost by 9 points, which surprised everyone.** XGBoost dominates tabular benchmarks — it was the expected winner. But airline demand is sequential, not tabular. GRU's hidden state carries 12 months of context automatically. XGBoost needed lag_12 engineered manually, and even with that it couldn't replicate what GRU learned from the sequence directly.
- 
-**GMM found a real structure without any labels.** The Low and High clusters differ by roughly 10x in average passenger volume. That gap wasn't given to the model — it found it on its own. A Silhouette Score of 0.3857 confirms the clusters are meaningfully distinct, not arbitrary, which is a solid result for overlapping real-world airline data.
- 
-**Every model learned a different definition of "worthwhile."** Keep rates range from 3.4% (SOA) to 34% (XGBoost) on the same dataset. The threshold choice matters as much as the model choice.
- 
-**The preprocessing pipeline recovered ~207K rows that would otherwise have been dropped.** Cascading grouped-median imputation — first by route+airline+month, then by route+month, then by route — filled missing passenger values at three levels of granularity before a final drop of ~43K rows that couldn't be recovered. Full details are in `Preprocessing.py`.
- 
+
+# 🔍 Key Insights
+
+## 🧠 The Power of Sequential Learning
+
+The GRU model outperformed XGBoost by nearly **9 percentage points**.
+
+While XGBoost performs exceptionally well on structured tabular data, airline demand is inherently sequential and time-dependent.
+
+The GRU's ability to retain temporal context over a rolling 12-month period allowed it to outperform manually engineered lag features.
+
 ---
- 
-## Limitations
- 
-- No cost or revenue data in the dataset. Models classify demand, not profitability. A route can be high-demand and still lose money.
-- XGBoost's 34% Keep rate suggests its threshold may be too lenient for real operational use.
-- GRU requires at least 12 months of route history to build a sequence — new routes can't be scored.
+
+## 🔬 Unsupervised Pattern Discovery
+
+The Gaussian Mixture Model successfully identified distinct demand clusters without using labels during training.
+
+Key findings:
+- Over **10× passenger volume difference** between clusters
+- Clear separation between high-demand and low-demand routes
+- Statistically meaningful clustering behavior validated through:
+  - Silhouette Score
+  - BIC/AIC optimization
+  - Cluster probability analysis
+
 ---
- 
-*University of Jeddah — College of Computer Science & Engineering*  
-*CCAI323 Machine Learning | Fall 2026*
+
+## 🧹 Preprocessing Impact
+
+A cascading grouped-median imputation strategy recovered over:
+
+> **200,000+ rows**
+
+that would otherwise have been discarded due to missing values.
+
+This significantly improved:
+- Training robustness
+- Dataset coverage
+- Model stability
+
+---
+
+# 🏫 Academic Information
+
+**University of Jeddah**  
+College of Computer Science & Engineering  
+
+**Course:** CCAI323 Machine Learning  
+**Semester:** Fall 2026
+
+---
+
+# 🚀 Future Improvements
+
+Potential future enhancements include:
+
+- Real-time demand prediction
+- Transformer-based sequence models
+- External economic and tourism indicators
+- Weather integration
+- Fuel price impact analysis
+- Interactive dashboard deployment
+- Route profitability forecasting
+
+---
+
+# 📜 License
+
+This project was developed for academic and research purposes.
